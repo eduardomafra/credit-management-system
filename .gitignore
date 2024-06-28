@@ -11,3 +11,13 @@
 /customer-service/src/CustomerService.Domain/obj
 /customer-service/src/CustomerService.Infrastructure/obj
 /customer-service/src/CustomerService.IoC/obj
+/credit-card-service/src/CreditCardService.Application/obj
+/credit-card-service/src/CreditCardService.Domain/obj
+/credit-card-service/src/CreditCardService.Host/obj
+/credit-card-service/src/CreditCardService.Infrastructure/obj
+/credit-card-service/src/CreditCardService.IoC/obj
+/credit-proposal-service/src/CreditProposalService.Application/obj
+/credit-proposal-service/src/CreditProposalService.Domain/obj
+/credit-proposal-service/src/CreditProposalService.Host/obj
+/credit-proposal-service/src/CreditProposalService.Infrastructure/obj
+/credit-proposal-service/src/CreditProposalService.IoC/obj
