@@ -35,10 +35,6 @@ namespace CustomerService.Infrastructure.Data.Configurations
             builder.HasOne(c => c.FinancialProfile)
                    .WithOne()
                    .HasForeignKey<FinancialProfile>(f => f.CustomerId);
-
-            builder.HasOne(c => c.Address)
-                   .WithOne()
-                   .HasForeignKey<Address>(a => a.CustomerId);
         }
     }
 }

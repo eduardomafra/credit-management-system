@@ -25,7 +25,7 @@ namespace CustomerService.Application.Services
                 var customer = dto.Adapt<Customer>();
                 await _customerRepository.AddAsync(customer);
 
-                _messagePublisher.Publish(customer, "customer.register");
+                _messagePublisher.Publish(customer, "registerCustomerQueue");
 
                 return new ApiResponse<bool>(true);
             }

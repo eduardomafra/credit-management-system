@@ -1,4 +1,5 @@
 using CustomerService.Infrastructure.Data;
+using CustomerService.Infrastructure.Settings;
 using CustomerService.IoC;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices(builder.Configuration);
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMQ"));
 
 builder.Services.AddDbContext<CustomerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

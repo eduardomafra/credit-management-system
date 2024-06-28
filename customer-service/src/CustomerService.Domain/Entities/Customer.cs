@@ -9,7 +9,6 @@
         public string Email { get; set; }
         public string Phone { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public virtual Address Address { get; set; }
         public virtual FinancialProfile FinancialProfile { get; set; }
     }
 }
