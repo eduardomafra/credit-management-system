@@ -1,6 +1,7 @@
 ﻿using CustomerService.Application.DTOs;
 using CustomerService.Application.Interfaces.Services;
 using CustomerService.Domain.Entities;
+using CustomerService.Domain.Interfaces.Messaging;
 using CustomerService.Domain.Interfaces.Repositories;
 using Mapster;
 
@@ -9,10 +10,12 @@ namespace CustomerService.Application.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IMessagePublisher _messagePublisher;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(ICustomerRepository customerRepository, IMessagePublisher messagePublisher)
         {
             _customerRepository = customerRepository;
+            _messagePublisher = messagePublisher;
         }
 
         public async Task<ApiResponse<bool>> RegisterCustomer(CustomerDto dto)
@@ -21,6 +24,8 @@ namespace CustomerService.Application.Services
             {
                 var customer = dto.Adapt<Customer>();
                 await _customerRepository.AddAsync(customer);
+
+                _messagePublisher.Publish(customer, "customer.register");
 
                 return new ApiResponse<bool>(true);
             }
