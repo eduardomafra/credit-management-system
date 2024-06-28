@@ -1,0 +1,13 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/credit-card-service/.vs
+/credit-proposal-service/.vs
+/customer-service/.vs
+/customer-service/src/CustomerService.API/obj
+/customer-service/src/CustomerService.Application/obj
+/customer-service/src/CustomerService.Domain/obj
+/customer-service/src/CustomerService.Infrastructure/obj
+/customer-service/src/CustomerService.IoC/obj
