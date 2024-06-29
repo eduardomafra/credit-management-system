@@ -24,10 +24,10 @@ namespace CreditProposalService.Infrastructure.Messaging
             _options = options.Value;
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
@@ -39,7 +39,7 @@ namespace CreditProposalService.Infrastructure.Messaging
                     {
                         var creditProposalService = scope.ServiceProvider.GetRequiredService<ICreditProposalService>();
                         var financialProfile = JsonSerializer.Deserialize<FinancialProfileDto>(message);
-                        creditProposalService.ProcessProposal(financialProfile);
+                        await creditProposalService.ProcessProposal(financialProfile);
                     }
                 }
                 catch (Exception ex)
@@ -49,13 +49,13 @@ namespace CreditProposalService.Infrastructure.Messaging
             };
 
             _channel.BasicConsume(queue: _options.CustomerQueue, autoAck: true, consumer: consumer);
+
             return Task.CompletedTask;
         }
 
         public override void Dispose()
         {
-            _channel.Close();
-            _channel.Dispose();
+            _channel?.Dispose();
             base.Dispose();
         }
     }

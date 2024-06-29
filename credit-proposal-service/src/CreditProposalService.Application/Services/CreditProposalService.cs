@@ -2,6 +2,7 @@
 using CreditProposalService.Application.Interfaces.Services;
 using CreditProposalService.Application.Settings;
 using CreditProposalService.Domain.Entities;
+using CreditProposalService.Domain.Interfaces.Messaging;
 using CreditProposalService.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Options;
 
@@ -10,11 +11,15 @@ namespace CreditProposalService.Application.Services
     public class CreditProposalService : ICreditProposalService
     {
         private readonly ICreditProposalRepository _creditProposalRepository;
+        private readonly IMessagePublisher _messagePublisher;
         private readonly CreditProposalSettings _settings;
 
-        public CreditProposalService(ICreditProposalRepository creditProposalRepository, IOptions<CreditProposalSettings> settings)
+        public CreditProposalService(ICreditProposalRepository creditProposalRepository, 
+            IMessagePublisher messagePublisher, 
+            IOptions<CreditProposalSettings> settings)
         {
             _creditProposalRepository = creditProposalRepository;
+            _messagePublisher = messagePublisher;
             _settings = settings.Value;
         }
 
@@ -23,16 +28,15 @@ namespace CreditProposalService.Application.Services
             try
             {
                 var creditProposal = new CreditProposal(financialProfile.CustomerId, financialProfile.FinancialProfileId, CalculateCreditLimit(financialProfile));
-
                 await _creditProposalRepository.AddAsync(creditProposal);
+
+                _messagePublisher.Publish(creditProposal);
             }
             catch (Exception ex)
             {
 
                 throw;
             }
-            
-
         }
 
         private decimal CalculateCreditLimit(FinancialProfileDto profile)

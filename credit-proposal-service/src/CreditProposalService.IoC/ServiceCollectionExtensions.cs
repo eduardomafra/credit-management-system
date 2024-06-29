@@ -6,6 +6,7 @@ using CreditProposalService.Infrastructure.Messaging;
 using CreditProposalService.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 
 namespace CreditProposalService.IoC
