@@ -42,3 +42,6 @@
 /credit-proposal-service/src/CreditProposalService.Infrastructure/Migrations
 /credit-card-service/src/CreditCardService.Api/bin
 /credit-card-service/src/CreditCardService.Api/obj
+/customer-service/src/CustomerService.API/Logs
+/customer-service/src/CustomerService.API/Properties/PublishProfiles
+/customer-service/src/CustomerService.API/CustomerService.API.csproj.user

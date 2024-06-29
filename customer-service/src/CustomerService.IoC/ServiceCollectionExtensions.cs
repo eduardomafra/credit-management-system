@@ -28,18 +28,34 @@ namespace CustomerService.IoC
 
         public static IServiceCollection AddMessaging(this IServiceCollection services, IConfiguration configuration)
         {
-            var rabbitMqOptions = new RabbitMqOptions();
+            var rabbitMqOptions = new RabbitMqSettings();
             configuration.GetSection("RabbitMQ").Bind(rabbitMqOptions);
 
             var factory = new ConnectionFactory()
             {
                 HostName = rabbitMqOptions.Hostname,
                 UserName = rabbitMqOptions.Username,
+                Port = rabbitMqOptions.Port,
                 Password = rabbitMqOptions.Password
             };
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: rabbitMqOptions.QueueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+
+            channel.QueueDeclare(queue: rabbitMqOptions.CustomerQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+
+            channel.ExchangeDeclare(exchange: "dead-letter-exchange", type: "direct");
+            var args = new Dictionary<string, object>
+            {
+                { "x-dead-letter-exchange", "dead-letter-exchange" },
+                { "x-dead-letter-routing-key", "dead-letter-routing-key" }
+            };
+
+            channel.QueueDeclare(queue: "dead-letter-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
+            channel.QueueBind(queue: "dead-letter-queue", exchange: "dead-letter-exchange", routingKey: "dead-letter-routing-key");
+
+            channel.ExchangeDeclare(exchange: "error-exchange", type: "direct");
+            channel.QueueDeclare(queue: rabbitMqOptions.ErrorQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            channel.QueueBind(queue: rabbitMqOptions.ErrorQueue, exchange: "error-exchange", routingKey: "error-routing-key");
 
             services.AddSingleton<IModel>(channel);
             services.AddSingleton<IMessagePublisher, MessagePublisher>();
