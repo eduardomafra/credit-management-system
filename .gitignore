@@ -40,3 +40,5 @@
 /credit-proposal-service/src/CreditProposalService.Api/obj
 /credit-proposal-service/src/CreditProposalService.Api/bin
 /credit-proposal-service/src/CreditProposalService.Infrastructure/Migrations
+/credit-card-service/src/CreditCardService.Api/bin
+/credit-card-service/src/CreditCardService.Api/obj

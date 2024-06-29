@@ -5,15 +5,15 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{027F0519-7700-4CE1-BAD4-BC0863FA0691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Host", "src\CreditCardService.Host\CreditCardService.Host.csproj", "{FCB2FC91-9242-4167-AA81-AE4A192B8B17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.Application", "src\CreditCardService.Application\CreditCardService.Application.csproj", "{6CB57282-46E0-4D6D-BE0A-95912083EE18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Application", "src\CreditCardService.Application\CreditCardService.Application.csproj", "{6CB57282-46E0-4D6D-BE0A-95912083EE18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.Domain", "src\CreditCardService.Domain\CreditCardService.Domain.csproj", "{96BFBA43-3145-4572-9B8D-8E70FEB8BBD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Domain", "src\CreditCardService.Domain\CreditCardService.Domain.csproj", "{96BFBA43-3145-4572-9B8D-8E70FEB8BBD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.Infrastructure", "src\CreditCardService.Infrastructure\CreditCardService.Infrastructure.csproj", "{B872584B-8099-430F-AF2F-258D8AAE2E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Infrastructure", "src\CreditCardService.Infrastructure\CreditCardService.Infrastructure.csproj", "{B872584B-8099-430F-AF2F-258D8AAE2E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.IoC", "src\CreditCardService.IoC\CreditCardService.IoC.csproj", "{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.IoC", "src\CreditCardService.IoC\CreditCardService.IoC.csproj", "{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Api", "src\CreditCardService.Api\CreditCardService.Api.csproj", "{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FCB2FC91-9242-4167-AA81-AE4A192B8B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCB2FC91-9242-4167-AA81-AE4A192B8B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCB2FC91-9242-4167-AA81-AE4A192B8B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCB2FC91-9242-4167-AA81-AE4A192B8B17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6CB57282-46E0-4D6D-BE0A-95912083EE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CB57282-46E0-4D6D-BE0A-95912083EE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CB57282-46E0-4D6D-BE0A-95912083EE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,16 +37,20 @@ Global
 		{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FCB2FC91-9242-4167-AA81-AE4A192B8B17} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 		{6CB57282-46E0-4D6D-BE0A-95912083EE18} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 		{96BFBA43-3145-4572-9B8D-8E70FEB8BBD9} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 		{B872584B-8099-430F-AF2F-258D8AAE2E5F} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 		{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
+		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2527D660-49AB-4480-A0FD-4D8B0817D0D8}
