@@ -1,5 +1,6 @@
 ﻿using CustomerService.Application.DTOs;
 using CustomerService.Application.Interfaces.Services;
+using CustomerService.Application.Validators;
 using CustomerService.Domain.Entities;
 using CustomerService.Domain.Interfaces.Messaging;
 using CustomerService.Domain.Interfaces.Repositories;
@@ -27,6 +28,15 @@ namespace CustomerService.Application.Services
             try
             {
                 _logger.LogInformation($"Starting customer registration for {dto.Name} with email {dto.Email}");
+
+                var validator = new CustomerDtoValidator();
+                var validationResult = await validator.ValidateAsync(dto);
+
+                if (!validationResult.IsValid)
+                {
+                    var errorMessages = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                    return new ApiResponse<bool>(errorMessages, (int)System.Net.HttpStatusCode.BadRequest);
+                }
 
                 var customer = dto.Adapt<Customer>();
                 await _customerRepository.AddAsync(customer);

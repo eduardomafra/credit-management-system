@@ -14,7 +14,7 @@ namespace CustomerService.Application.Validators
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email é obrigatório.")
                                  .EmailAddress().WithMessage("Email invalido.");
             RuleFor(x => x.Phone).NotEmpty().WithMessage("Contato telefônico é obrigatório.");
-            RuleFor(x => x.FinancialProfile).NotNull().WithMessage("Financial Profile is required.");
+            RuleFor(x => x.FinancialProfile).NotNull().WithMessage("Perfil financeiro é obrigatório");
         }
     }
 }
