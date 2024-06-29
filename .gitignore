@@ -39,3 +39,4 @@
 /customer-service/src/CustomerService.Infrastructure/Migrations
 /credit-proposal-service/src/CreditProposalService.Api/obj
 /credit-proposal-service/src/CreditProposalService.Api/bin
+/credit-proposal-service/src/CreditProposalService.Infrastructure/Migrations
