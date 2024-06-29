@@ -18,7 +18,7 @@ namespace CustomerService.Infrastructure.Messaging
             _options = options.Value;
         }
 
-        public void Publish<T>(T message, string routingKey = "")
+        public void Publish<T>(T message)
         {
             var json = JsonSerializer.Serialize(message);
             var body = Encoding.UTF8.GetBytes(json);

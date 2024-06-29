@@ -8,7 +8,7 @@
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
         public virtual FinancialProfile FinancialProfile { get; set; }
     }
 }

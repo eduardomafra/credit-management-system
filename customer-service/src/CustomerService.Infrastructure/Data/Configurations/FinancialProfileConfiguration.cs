@@ -16,6 +16,12 @@ namespace CustomerService.Infrastructure.Data.Configurations
             builder.Property(f => f.CreditScore)
                    .IsRequired();
 
+            builder.Property(f => f.OwnsHome)
+                   .IsRequired();
+
+            builder.Property(f => f.OwnsVehicle)
+                   .IsRequired();
+                        
             builder.HasOne<Customer>()
                .WithOne()
                .HasForeignKey<FinancialProfile>("CustomerId");
