@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.IoC", "src\CreditCardService.IoC\CreditCardService.IoC.csproj", "{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Api", "src\CreditCardService.Api\CreditCardService.Api.csproj", "{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardService.Api", "src\CreditCardService.Api\CreditCardService.Api.csproj", "{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{864CE21C-4040-43F1-A90B-B7197DD5E43B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardService.Tests", "tests\CreditCardService.Tests\CreditCardService.Tests.csproj", "{16B602D0-7868-40F6-BBE4-47023682E82A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16B602D0-7868-40F6-BBE4-47023682E82A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B602D0-7868-40F6-BBE4-47023682E82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B602D0-7868-40F6-BBE4-47023682E82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B602D0-7868-40F6-BBE4-47023682E82A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +59,7 @@ Global
 		{B872584B-8099-430F-AF2F-258D8AAE2E5F} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 		{6FEB48D4-0C73-42BE-B0C3-3AE9CD132BC3} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
 		{3EA7A67F-27F2-4F79-89A8-DA7F8469E761} = {027F0519-7700-4CE1-BAD4-BC0863FA0691}
+		{16B602D0-7868-40F6-BBE4-47023682E82A} = {864CE21C-4040-43F1-A90B-B7197DD5E43B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2527D660-49AB-4480-A0FD-4D8B0817D0D8}

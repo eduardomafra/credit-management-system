@@ -1,7 +1,9 @@
-﻿namespace CreditCardService.Domain.Interfaces.Messaging
+﻿using CreditCardService.Domain.Models;
+
+namespace CreditCardService.Domain.Interfaces.Messaging
 {
     public interface IMessagePublisher
     {
-        void Publish<T>(T message);
+        void PublishErrorEvent(ErrorEvent errorEvent);
     }
 }

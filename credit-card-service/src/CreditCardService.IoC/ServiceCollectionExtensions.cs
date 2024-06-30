@@ -34,13 +34,13 @@ namespace CreditCardService.IoC
             var factory = new ConnectionFactory()
             {
                 HostName = rabbitMqOptions.Hostname,
+                Port = rabbitMqOptions.Port,
                 UserName = rabbitMqOptions.Username,
                 Password = rabbitMqOptions.Password
             };
 
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: rabbitMqOptions.CreditProposalQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
             services.AddSingleton<IModel>(channel);
             services.AddSingleton<IMessagePublisher, MessagePublisher>();

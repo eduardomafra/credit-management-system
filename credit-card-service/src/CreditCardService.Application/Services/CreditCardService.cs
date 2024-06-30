@@ -3,20 +3,22 @@ using CreditCardService.Application.Interfaces.Services;
 using CreditCardService.Domain.Entities;
 using CreditCardService.Domain.Interfaces.Messaging;
 using CreditCardService.Domain.Interfaces.Repositories;
-using System;
-using System.Security.Cryptography;
+using Microsoft.Extensions.Logging;
 using System.Text;
 
 namespace CreditCardService.Application.Services
 {
     public class CreditCardService : ICreditCardService
     {
+        private readonly ILogger<CreditCardService> _logger;
         private readonly ICreditCardRepository _creditCardRepository;
         private readonly IMessagePublisher _messagePublisher;
 
-        public CreditCardService(ICreditCardRepository creditCardRepository,
+        public CreditCardService(ILogger<CreditCardService> logger,
+            ICreditCardRepository creditCardRepository,
             IMessagePublisher messagePublisher)
         {
+            _logger = logger;
             _creditCardRepository = creditCardRepository;
             _messagePublisher = messagePublisher;
         }
@@ -25,15 +27,19 @@ namespace CreditCardService.Application.Services
         {
             try
             {
+                _logger.LogInformation($"Processing credit card for CustomerId: {creditProposal.CustomerId}");
                 var creditCard = new CreditCard(creditProposal.CustomerId, creditProposal.CreditProposalId, GenerateCardNumber(),
                     GenerateCVV(), string.Empty, creditProposal.Amount);
                 await _creditCardRepository.AddAsync(creditCard);
 
-                _messagePublisher.Publish(creditCard);
+                _logger.LogInformation($"Credit card for CustomerId: {creditProposal.CustomerId} added successfully");
+
+                //_messagePublisher.Publish(creditCard);
+                _logger.LogInformation($"Credit card for CustomerId: {creditProposal.CustomerId} published successfully");
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, $"An error occurred while processing credit card for CustomerId: {creditProposal.CustomerId}");
                 throw;
             }
         }
@@ -46,6 +52,7 @@ namespace CreditCardService.Application.Services
             for (int i = 0; i < 16; i++)
                 cardNumber.Append(random.Next(0, 10));
 
+            _logger.LogInformation($"Generated card number: {cardNumber}");
             return cardNumber.ToString();
         }
 
@@ -57,6 +64,7 @@ namespace CreditCardService.Application.Services
             for (int i = 0; i < 3; i++)
                 cvv.Append(random.Next(0, 10));
 
+            _logger.LogInformation($"Generated CVV: {cvv}");
             return cvv.ToString();
         }
     }

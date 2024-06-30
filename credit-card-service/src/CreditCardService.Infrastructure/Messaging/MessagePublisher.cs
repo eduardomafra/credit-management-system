@@ -4,30 +4,37 @@ using System.Text.Json;
 using System.Text;
 using CreditCardService.Application.Settings;
 using RabbitMQ.Client;
+using CreditCardService.Domain.Models;
+using Microsoft.Extensions.Logging;
 
 namespace CreditCardService.Infrastructure.Messaging
 {
     public class MessagePublisher : IMessagePublisher
     {
+        private readonly ILogger<MessagePublisher> _logger;
         private readonly IModel _channel;
-        private readonly RabbitMqSettings _options;
 
-        public MessagePublisher(IModel channel, IOptions<RabbitMqSettings> options)
+        public MessagePublisher(ILogger<MessagePublisher> logger,
+            IModel channel)
         {
+            _logger = logger;
             _channel = channel;
-            _options = options.Value;
         }
 
-        public void Publish<T>(T message)
+        public void PublishErrorEvent(ErrorEvent errorEvent)
         {
-            var json = JsonSerializer.Serialize(message);
+            var json = JsonSerializer.Serialize(errorEvent);
             var body = Encoding.UTF8.GetBytes(json);
 
-            _channel.BasicPublish(
-                exchange: string.Empty,
-                routingKey: _options.CreditCardQueue,
-                basicProperties: null,
-                body: body);
+            var properties = _channel.CreateBasicProperties();
+            properties.Persistent = true;
+
+            _channel.BasicPublish(exchange: "error-exchange",
+                                  routingKey: "error-routing-key",
+                                  basicProperties: properties,
+                                  body: body);
+
+            _logger.LogError($"Error event published to error exchange: {json}");
         }
     }
 }

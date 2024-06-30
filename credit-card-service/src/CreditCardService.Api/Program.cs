@@ -3,6 +3,7 @@ using CreditCardService.Infrastructure.Data;
 using CreditCardService.Infrastructure.Messaging;
 using CreditCardService.IoC;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +17,14 @@ builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("R
 builder.Services.AddDbContext<CreditCardDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 builder.Services.AddHostedService<MessageConsumer>();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 
