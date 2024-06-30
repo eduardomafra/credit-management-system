@@ -3,6 +3,7 @@ using CreditProposalService.Infrastructure.Data;
 using CreditProposalService.Infrastructure.Messaging;
 using CreditProposalService.IoC;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +17,14 @@ builder.Services.Configure<CreditProposalSettings>(builder.Configuration.GetSect
 builder.Services.AddDbContext<CreditProposalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 builder.Services.AddHostedService<MessageConsumer>();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 

@@ -1,7 +1,6 @@
 ﻿using CreditProposalService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Net;
 
 namespace CreditProposalService.Infrastructure.Data.Configurations
 {
@@ -12,6 +11,9 @@ namespace CreditProposalService.Infrastructure.Data.Configurations
             builder.HasKey(a => a.CreditProposalId);
 
             builder.Property(a => a.CustomerId)
+                   .IsRequired();
+
+            builder.Property(a => a.FinancialProfileId)
                    .IsRequired();
 
             builder.Property(a => a.Amount)

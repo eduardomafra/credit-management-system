@@ -6,7 +6,6 @@ using CreditProposalService.Infrastructure.Messaging;
 using CreditProposalService.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 
 namespace CreditProposalService.IoC
@@ -35,14 +34,16 @@ namespace CreditProposalService.IoC
             var factory = new ConnectionFactory()
             {
                 HostName = rabbitMqOptions.Hostname,
+                Port = rabbitMqOptions.Port,
                 UserName = rabbitMqOptions.Username,
                 Password = rabbitMqOptions.Password
             };
 
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: rabbitMqOptions.CreditProposalQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
+                        
+            channel.QueueDeclare(queue: "credit-proposal-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
+                        
             services.AddSingleton<IModel>(channel);
             services.AddSingleton<IMessagePublisher, MessagePublisher>();
 
