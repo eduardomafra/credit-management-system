@@ -3,6 +3,7 @@ using CustomerService.Domain.Models;
 using CustomerService.Infrastructure.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -13,15 +14,15 @@ namespace CustomerService.Infrastructure.Messaging
 {
     public class ErrorEventConsumer : BackgroundService
     {
+        private readonly ILogger<ErrorEventConsumer> _logger;
         private readonly IModel _channel;
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        private readonly RabbitMqSettings _options;
 
-        public ErrorEventConsumer(IModel channel, IServiceScopeFactory serviceScopeFactory, IOptions<RabbitMqSettings> options)
+        public ErrorEventConsumer(ILogger<ErrorEventConsumer> logger, IModel channel, IServiceScopeFactory serviceScopeFactory)
         {
+            _logger = logger;
             _channel = channel;
             _serviceScopeFactory = serviceScopeFactory;
-            _options = options.Value;
         }
 
         protected override Task ExecuteAsync(CancellationToken cancellationToken)
@@ -31,7 +32,7 @@ namespace CustomerService.Infrastructure.Messaging
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine($"Error event received: {message}");
+                _logger.LogInformation("Error event received: {Message}", message);
 
                 var errorEvent = JsonSerializer.Deserialize<ErrorEvent>(message);
 
@@ -44,7 +45,7 @@ namespace CustomerService.Infrastructure.Messaging
                 _channel.BasicAck(ea.DeliveryTag, false);
             };
 
-            _channel.BasicConsume(queue: _options.ErrorQueue, autoAck: false, consumer: consumer);
+            _channel.BasicConsume(queue: "error-queue", autoAck: false, consumer: consumer);
 
             return Task.CompletedTask;
         }

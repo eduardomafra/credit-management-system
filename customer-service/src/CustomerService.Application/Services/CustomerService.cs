@@ -23,7 +23,7 @@ namespace CustomerService.Application.Services
             _messagePublisher = messagePublisher;
         }
 
-        public async Task<ApiResponse<bool>> RegisterCustomer(CustomerDto dto)
+        public async Task<ApiResponse<string>> RegisterCustomer(CustomerDto dto)
         {
             try
             {
@@ -35,22 +35,22 @@ namespace CustomerService.Application.Services
                 if (!validationResult.IsValid)
                 {
                     var errorMessages = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-                    return new ApiResponse<bool>(errorMessages, (int)System.Net.HttpStatusCode.BadRequest);
+                    return new ApiResponse<string>(errorMessages, (int)System.Net.HttpStatusCode.BadRequest);
                 }
 
                 var customer = dto.Adapt<Customer>();
                 await _customerRepository.AddAsync(customer);
                 _logger.LogInformation($"Customer {customer.CustomerId} added successfully to the database");
 
-                _messagePublisher.Publish(customer.FinancialProfile);
+                _messagePublisher.Publish(customer.FinancialProfile, "customer-queue");
                 _logger.LogInformation($"Financial profile published for customer {customer.CustomerId}");
 
-                return new ApiResponse<bool>(true);
+                return new ApiResponse<string>("Cliente registrado com sucesso.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"An error occurred while registering customer with name {dto.Name} email {dto.Email}");
-                return new ApiResponse<bool>(new List<string> { "Ocorreu um erro interno" });
+                return new ApiResponse<string>(new List<string> { "Ocorreu um erro interno" });
             }
         }
         public void ProcessErrorEvent(ErrorEvent errorEvent) =>     

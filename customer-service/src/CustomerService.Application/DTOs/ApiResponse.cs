@@ -13,7 +13,7 @@
         public ApiResponse(IEnumerable<string> errors = null, int statusCode = 500)
         {
             Success = false;
-            StatusCode = 500;
+            StatusCode = statusCode;
             Errors = errors;
             Result = default;
         }

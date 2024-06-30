@@ -45,3 +45,11 @@
 /customer-service/src/CustomerService.API/Logs
 /customer-service/src/CustomerService.API/Properties/PublishProfiles
 /customer-service/src/CustomerService.API/CustomerService.API.csproj.user
+/credit-proposal-service/src/CreditProposalService.Api/Logs
+/credit-proposal-service/tests/CreditProposalService.Tests/bin
+/credit-proposal-service/tests/CreditProposalService.Tests/obj
+/customer-service/tests/CustomerService.Tests/bin
+/customer-service/tests/CustomerService.Tests/obj
+/credit-card-service/src/CreditCardService.Api/Logs
+/credit-card-service/tests/CreditCardService.Tests/bin
+/credit-card-service/tests/CreditCardService.Tests/obj
