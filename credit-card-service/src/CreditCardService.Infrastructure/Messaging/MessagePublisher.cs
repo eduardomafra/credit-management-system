@@ -1,8 +1,6 @@
 ﻿using CreditCardService.Domain.Interfaces.Messaging;
-using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Text;
-using CreditCardService.Application.Settings;
 using RabbitMQ.Client;
 using CreditCardService.Domain.Models;
 using Microsoft.Extensions.Logging;
