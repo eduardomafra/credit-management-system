@@ -1,10 +1,8 @@
 ﻿using CustomerService.Application.Interfaces.Services;
 using CustomerService.Domain.Models;
-using CustomerService.Infrastructure.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
