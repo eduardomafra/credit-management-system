@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{55F842E1-421E-41FF-86EF-BD6721ED4B7B}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditProposalService.Application", "src\CreditProposalService.Application\CreditProposalService.Application.csproj", "{A55D47F1-FBA9-42D3-8A6B-D7EA97ED43FC}"
 EndProject

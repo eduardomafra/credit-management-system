@@ -53,3 +53,4 @@
 /credit-card-service/src/CreditCardService.Api/Logs
 /credit-card-service/tests/CreditCardService.Tests/bin
 /credit-card-service/tests/CreditCardService.Tests/obj
+/credit-card-service/src/obj

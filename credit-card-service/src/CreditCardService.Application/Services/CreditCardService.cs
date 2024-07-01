@@ -33,9 +33,6 @@ namespace CreditCardService.Application.Services
                 await _creditCardRepository.AddAsync(creditCard);
 
                 _logger.LogInformation($"Credit card for CustomerId: {creditProposal.CustomerId} added successfully");
-
-                //_messagePublisher.Publish(creditCard);
-                _logger.LogInformation($"Credit card for CustomerId: {creditProposal.CustomerId} published successfully");
             }
             catch (Exception ex)
             {

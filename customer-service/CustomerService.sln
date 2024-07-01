@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{92D68A45-75BC-4BAD-8516-43963F1520CA}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.API", "src\CustomerService.API\CustomerService.API.csproj", "{A241D358-F196-4232-B068-5EDA52DF5E31}"
 EndProject
@@ -17,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.IoC", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{356F4AAF-211A-4414-A767-5E5746AE3BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService.Tests", "tests\CustomerService.Tests\CustomerService.Tests.csproj", "{8AE9EA02-7B07-4233-B7B8-274040A2860A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.Tests", "tests\CustomerService.Tests\CustomerService.Tests.csproj", "{8AE9EA02-7B07-4233-B7B8-274040A2860A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
