@@ -1,0 +1,66 @@
+version: '2.1'
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "1{dw&M^87.Vz"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - app-network
+
+  customer-service:
+    image: customer-service:latest
+    build:
+      context: ./customer-service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    networks:
+      - app-network
+
+  credit-proposal-service:
+    image: credit-proposal-service:latest
+    build:
+      context: ./credit-proposal-service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5000"
+    depends_on:
+      - customer-service
+    networks:
+      - app-network
+
+  credit-card-service:
+    image: credit-card-service:latest
+    build:
+      context: ./credit-card-service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5000"
+    depends_on:
+      - credit-proposal-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+  
